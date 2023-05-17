@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+#define m 100
+
+
+int main (){
+    char dw[m],di[m], str[m];
+    printf ("\n Enter the data word :: ");
+    gets(dw);
+    printf ("\n Enter the divisor :: ");
+    gets(di);
+    int divlen = strlen(di), dwlen = strlen(dw);
+    strcpy(str, dw);
+    for (int i = 0, j = dwlen; i < divlen-1; i ++){
+        str[j] = '0';
+        j ++;
+    }
+   // puts (str);
+    int j =0;
+    int temp_len = strlen (str);
+      while (j < strlen (str) && temp_len >= divlen){
+        if (str[j] == '1'){
+            //printf ("hii");
+             for (int i = 0; i < divlen; i ++){
+                  str[j] = ((str[j] - '0') ^ (di[i] - '0')) + '0';
+                     //puts(str);
+                       j ++;
+              }
+              
+              j = j - divlen + 1;
+        }
+        else{
+            j ++;
+        }
+        temp_len = 0;
+        for (int k = j; k <= strlen(str); k ++){
+           temp_len ++;
+        }
+        puts(str);
+    }
+    printf ("\n CRC = ");
+    for (int k = strlen(str)-divlen+1; k < strlen(str); k ++){
+        printf ("%c",str[k]);
+    }
+}
