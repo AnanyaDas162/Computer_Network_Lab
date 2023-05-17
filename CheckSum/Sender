@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+#define m 100
+
+int main(){
+   char str[m];
+   char s[m];
+   int s_l=0;
+   printf ("\n Enter the dataword :: ");
+   gets(str);
+   int size = strlen(str);
+   printf ("\n Enter segment length :: ");
+   scanf("%d", &s_l);
+   if (size % s_l){
+       int temp = s_l - (size % s_l);
+       for (int i = 0; i < temp; i ++){
+           s[i] = '0';
+       }
+   }
+   strcat(s, str);
+   puts (s);
+   int result[s_l];
+   for (int i = 0; i < s_l; i ++){
+       result[i] = 0;
+   }
+   int carry = 0;
+   for (int i = 0; i < strlen(s); i += s_l){
+       carry = 0;
+       for (int j = i + s_l - 1; j >= i; j --){
+           int temp = (result[j-i] + s[j] - 48 + carry) % 2;
+           carry = (result[j-i] + s[j] - 48 + carry) / 2;
+           result[j-i] = temp;
+       }
+       if (carry == 1){
+           for (int k = s_l-1; k >= 0; k --){
+               int temp = (result[k] + carry) % 2;
+               carry = (result[k] + carry) / 2;
+                result[k] = temp;
+           }
+       }
+       for (int k = 0; k < s_l; k ++){
+           printf ("%d",result[k]);
+       }
+       printf ("\n");
+   }
+   for (int k = 0; k < s_l; k ++){
+       if (result[k] == 0){
+           result[k] = 1;
+       }
+       else{
+           result[k] = 0;
+       }
+   }
+   printf ("\n CheckSum = ");
+   for(int k = 0;k < s_l; k ++){
+       printf("%d",result[k]);
+   }
+   return 0;
+}//CheckSum
