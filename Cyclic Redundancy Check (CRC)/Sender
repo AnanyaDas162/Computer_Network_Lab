@@ -17,8 +17,8 @@ int main (){
     }
    // puts (str);
     int j =0;
-    int temp_len = strlen (str);
-      while (j < strlen (str) && temp_len >= divlen){
+    int temp_len = strlen (str), l = strlen(str);
+      while (j < strlen (str) && temp_len > divlen){
         if (str[j] == '1'){
             //printf ("hii");
              for (int i = 0; i < divlen; i ++){
@@ -33,10 +33,11 @@ int main (){
             j ++;
         }
         temp_len = 0;
-        for (int k = j; k <= strlen(str); k ++){
+        for (int k = j; k <= l; k ++){
            temp_len ++;
         }
         puts(str);
+        printf ("%d\t %d\n",j,temp_len);
     }
     printf ("\n CRC = ");
     for (int k = strlen(str)-divlen+1; k < strlen(str); k ++){
